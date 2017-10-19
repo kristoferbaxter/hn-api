@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/ts-out",
+    "sourceMap": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2017",
+    "baseUrl": ".",
+    "paths": {
+      "routes/*": [
+        "src/routes/*"
+      ],
+      "storage/*": [
+        "src/storage/*"
+      ]
+    },
+    "allowJs": false,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@kristoferbaxter/hn-api",
+  "version": "1.0.0",
+  "description": "Reusable HN-API for Node.js implementations of HNPWA. Background caches each feed, their feeditems, and foreground fetches details from publicly available APIs. Responses are delivered in a flat entity cache model for use with React-HN, Preact-HN, and Glimmer-HN.",
+  "main": "index.js",
+  "author": "Kristofer Baxter",
+  "license": "MIT",
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "./node_modules/prettier/bin/prettier.js --config ./.prettierrc --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "node-fetch": "^1.7.3",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.45",
+    "husky": "^0.14.3",
+    "prettier": "^1.7.4",
+    "typescript": "^2.5.3"
+  },
+  "private": false
+}

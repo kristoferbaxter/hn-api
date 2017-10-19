@@ -1,0 +1,10 @@
+# ignore node_modules and yarn lock
+node_modules/
+yarn.lock
+yarn-error.log
+
+# ignore vscode entries (best editor ever?!)
+.vscode/
+
+# oh .DS_Store you friendly awesome foe
+.DS_Store
