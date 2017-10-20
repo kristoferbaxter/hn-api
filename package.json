@@ -9,6 +9,7 @@
     "build": "./node_modules/typescript/bin/tsc",
     "precommit": "lint-staged"
   },
+  "types": "./index.d.ts",
   "lint-staged": {
     "*.ts": [
       "./node_modules/prettier/bin/prettier.js --config ./.prettierrc --write",
