@@ -6,6 +6,7 @@
   "author": "Kristofer Baxter",
   "license": "MIT",
   "scripts": {
+    "build": "./node_modules/typescript/bin/tsc",
     "precommit": "lint-staged"
   },
   "lint-staged": {

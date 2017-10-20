@@ -14,7 +14,7 @@ import {
   FeedItemRetievedMessage,
 } from '../types';
 
-const updateThread = cp.fork('dist/server/restify.background.js'); // TODO: FIX THIS PATH, USE require('path')
+let updateThread;
 
 const UPDATE_TIMER = 300000;
 const MAXIMUM_SIMULTANEOUS_UUID = UPDATE_TIMER / 1000 / 60 * 6;
@@ -87,7 +87,9 @@ updateThread.on('message', message => {
   }
 });
 
-export function init(): void {
+export function init(backgroundLocation: string): void {
+  updateThread = cp.fork(backgroundLocation);
+  
   const message: RetrieveFeedsMessage = {type: BackgroundUpdate.RetrieveFeeds, lastUpdate: null};
   updateThread.send(message);
 }

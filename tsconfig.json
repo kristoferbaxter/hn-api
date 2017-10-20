@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/ts-out",
+    "outDir": "./dist/",
     "sourceMap": false,
     "module": "esnext",
     "moduleResolution": "node",
@@ -17,5 +17,8 @@
     "allowJs": false,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }

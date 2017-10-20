@@ -64,11 +64,11 @@ process.on('message', async message => {
     const {lastUpdate} = message as RetrieveFeedsMessage;
 
     const newLists: FeedCollection = {
-      top: await updateListItems('top'),
-      new: await updateListItems('new'),
-      show: await updateListItems('show'),
-      ask: await updateListItems('ask'),
-      job: await updateListItems('job'),
+      top: await updateListItems("top"),
+      new: await updateListItems("new"),
+      show: await updateListItems("show"),
+      ask: await updateListItems("ask"),
+      job: await updateListItems("job"),
     };
 
     const deletionCandidates = findDeletionCandidates(newLists, lastUpdate);

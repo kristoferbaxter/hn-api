@@ -58,7 +58,9 @@ export const enum BackgroundUpdate {
   RetrieveFeedItem,
 }
 
-export type FeedCollection = {[P in keyof LIST_TYPES]: NumberToFeedItemId};
+export type FeedCollection = {
+  [P in LIST_TYPES]: NumberToFeedItemId
+};
 
 interface ThreadMessage {
   type: BackgroundUpdate;
