@@ -14,8 +14,6 @@ import {
   FeedItemRetievedMessage,
 } from '../types';
 
-let updateThread;
-
 const UPDATE_TIMER = 300000;
 const MAXIMUM_SIMULTANEOUS_UUID = UPDATE_TIMER / 1000 / 60 * 6;
 // Maximum of six hours of supported UUIDs.
@@ -66,30 +64,30 @@ function handleNewFeeds({feeds}: FeedsRetrievedMessage): void {
   storedFeeds[newUUID] = feeds;
 }
 
-updateThread.on('message', message => {
-  const {type} = message;
-
-  if (type === BackgroundUpdate.FeedsRetrieved) {
-    // This is the updated set of feeds that have been successfully retrieved.
-    handleNewFeeds(message as FeedsRetrievedMessage);
-    handleNewDeletionCandidates(message as FeedsRetrievedMessage);
-
-    const {feeds} = message as FeedsRetrievedMessage;
-    setTimeout(() => {
-      const message: RetrieveFeedsMessage = {type: BackgroundUpdate.RetrieveFeeds, lastUpdate: feeds};
-      updateThread.send(message);
-    }, UPDATE_TIMER);
-  } else if (type === BackgroundUpdate.FeedItemRetieved) {
-    const {item} = message as FeedItemRetievedMessage;
-    if (item && item.id) {
-      storedItems[item.id] = item;
-    }
-  }
-});
-
 export function init(backgroundLocation: string): void {
-  updateThread = cp.fork(backgroundLocation);
+  const updateThread = cp.fork(backgroundLocation);
+
+  updateThread.on('message', message => {
+    const {type} = message;
   
+    if (type === BackgroundUpdate.FeedsRetrieved) {
+      // This is the updated set of feeds that have been successfully retrieved.
+      handleNewFeeds(message as FeedsRetrievedMessage);
+      handleNewDeletionCandidates(message as FeedsRetrievedMessage);
+  
+      const {feeds} = message as FeedsRetrievedMessage;
+      setTimeout(() => {
+        const message: RetrieveFeedsMessage = {type: BackgroundUpdate.RetrieveFeeds, lastUpdate: feeds};
+        updateThread.send(message);
+      }, UPDATE_TIMER);
+    } else if (type === BackgroundUpdate.FeedItemRetieved) {
+      const {item} = message as FeedItemRetievedMessage;
+      if (item && item.id) {
+        storedItems[item.id] = item;
+      }
+    }
+  });
+
   const message: RetrieveFeedsMessage = {type: BackgroundUpdate.RetrieveFeeds, lastUpdate: null};
   updateThread.send(message);
 }

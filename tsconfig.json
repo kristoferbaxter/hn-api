@@ -7,9 +7,6 @@
     "target": "es2017",
     "baseUrl": ".",
     "paths": {
-      "routes/*": [
-        "src/routes/*"
-      ],
       "storage/*": [
         "src/storage/*"
       ]
